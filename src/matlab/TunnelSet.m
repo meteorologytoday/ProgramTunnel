@@ -23,7 +23,10 @@ classdef TunnelSet < handle
 
         function msg = recvText(self)
             fd = fopen(self.getTunnelFilename('recv_txt'), 'r');
-            msg = self.parse(fscanf(fd, '%s'));
+            %msg = self.parse(fscanf(fd, '%s'));
+
+            msg = fscanf(fd, '%s');
+
             fclose(fd);
         end 
 
@@ -32,6 +35,20 @@ classdef TunnelSet < handle
             fwrite(fd, msg);
             fclose(fd);
         end
+
+        function recvBinary(self, n)
+            fd = fopen(self.getTunnelFilename('recv_bin'), 'r');
+            fread(fd, n, 'double=>double')
+            fclose(fd); 
+        end
+
+        function sendBinary(self, arr)
+            fd = fopen(self.getTunnelFilename('send_bin'), 'w');
+            fwrite(fd, arr, 'double')
+            fclose(fd); 
+        end
+
+
 
         function obj = parse(self, msg)
             obj = containers.Map
@@ -43,6 +60,8 @@ classdef TunnelSet < handle
                 end
             end
         end
+
+
     end
 end
 
