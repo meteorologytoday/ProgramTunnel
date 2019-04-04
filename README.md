@@ -4,36 +4,40 @@ This is a tool to let different programs send text or binary data to each other 
 
 # Basic examples
 
-## Between Matlabs
+The examples are contained in folder `example`.
 
-### First create fifos
+## A: Between <=> Matlabs
+
+### I. First create fifos
 ```
 > cd example/matlab_matlab
 > ./mkTunnels.sh
 ```
 
-### Screen 1 (Matlab interactive mode)
+### II. Screen 1 (Matlab interactive mode)
 
 ```
 > % In folder example/matlab_matlab
 > proc1
 ```
 
-### Screen 2 (Matlab interactive mode)
+### III. Screen 2 (Matlab interactive mode)
+
 ```
 > % In folder example/matlab_matlab
 > proc2
 ```
 
-## Between Fortran and Matlab
+## B: Fortran <=> Matlab
 
-### First create fifos
+### I. First create fifos
+
 ```
 > cd example/fortran_matlab
 > ./mkTunnels.sh
 ```
 
-### Screen 1 (Bash)
+### II. Screen 1 (Bash)
 
 ```
 > # In folder example/fortran_matlab
@@ -41,7 +45,7 @@ This is a tool to let different programs send text or binary data to each other 
 > ./proc1.out
 ```
 
-### Screen 2 (Matlab interactive mode)
+### III. Screen 2 (Matlab interactive mode)
 ```
 > % In folder example/fortran_matlab
 > proc2
