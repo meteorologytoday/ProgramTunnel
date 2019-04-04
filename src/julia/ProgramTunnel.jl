@@ -12,10 +12,10 @@ mutable struct Tunnel
     fns      :: AbstractArray{AbstractString}
     next_ptr :: Integer
 
-    function Tunnel(id::AbstractString)
+    function Tunnel(name::AbstractString)
         fns = Array{AbstractString}(undef, 2)
         for i in 1:length(fns)
-            fns[i] = format("_{}_{:d}.fifo", id, i)
+            fns[i] = format("_{}_{:d}.fifo", name, i)
         end
         return new(fns, 1)
     end

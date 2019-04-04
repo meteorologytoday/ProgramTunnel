@@ -1,7 +1,19 @@
+classdef Tunnel
+    properties
+        fns
+        next_ptr
+    end
+
+    function self = Tunnel(name)
+    end
+end
+
+
 classdef MailboxPipe
     properties
         recv_fn
         send_fn
+        recv_T
     end
     methods
         function self = MailboxPipe(path)
