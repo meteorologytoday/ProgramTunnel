@@ -11,6 +11,17 @@ classdef TunnelSet < handle
             self.tnls('send_bin') = Tunnel(path, send_bin);
         end
 
+
+        function mkTunnel(self)
+
+            for k = keys(self.tnls)
+                tnl = self.tnls(k{1})
+                for i = 1:length(tnl.fns)
+                    system(sprintf('%s %s', 'mkfifo ', tnl.fns(i)))
+                end
+            end
+        end
+
         function reverseRole(self)
             [self.tnls('recv_txt'), self.tnls('send_txt')] = swap(self.tnls('recv_txt'), self.tnls('send_txt'));
             [self.tnls('recv_bin'), self.tnls('send_bin')] = swap(self.tnls('recv_bin'), self.tnls('send_bin'));
@@ -36,15 +47,15 @@ classdef TunnelSet < handle
             fclose(fd);
         end
 
-        function recvBinary(self, n)
+        function data = recvBinary(self, n)
             fd = fopen(self.getTunnelFilename('recv_bin'), 'r');
-            fread(fd, n, 'double=>double')
+            data = fread(fd, n, 'double=>double', 'ieee-le');
             fclose(fd); 
         end
 
         function sendBinary(self, arr)
             fd = fopen(self.getTunnelFilename('send_bin'), 'w');
-            fwrite(fd, arr, 'double')
+            fwrite(fd, arr, 'double', 'ieee-le');
             fclose(fd); 
         end
 
