@@ -1,12 +1,12 @@
 # ProgramTunnel
-This is a tool to let different programs send text or binary data to each other using named pipes (FIFOs). This project is developed along sith SMARTSLAB to let fortran program (CESM) to communicate with ocean model written in Julia.
+This is a tool to let different programs send text or binary data to each other using named pipes (FIFOs). This project is developed along with SMARTSLAB to let fortran program (CESM) to communicate with ocean model written in Julia.
 
 
 # Basic examples
 
 The examples are contained in folder `example`.
 
-## A: Between <=> Matlabs
+## A: Matlab v.s. Matlab
 
 ### I. First create fifos
 ```
@@ -28,7 +28,7 @@ The examples are contained in folder `example`.
 > proc2
 ```
 
-## B: Fortran <=> Matlab
+## B: Fortran v.s. Matlab
 
 ### I. First create fifos
 
