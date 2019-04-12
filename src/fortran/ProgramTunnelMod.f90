@@ -3,7 +3,6 @@ implicit none
 
 integer, parameter :: c_send_txt = 1, c_recv_txt = 2, c_send_bin = 3, c_recv_bin = 4
 character(len=256), parameter :: keys(4) = (/"X2Y_txt", "Y2X_txt", "X2Y_bin", "Y2X_bin"/)
-integer, parameter :: fd_beg = 50
 
 
 type ptm_Tunnel
@@ -43,18 +42,20 @@ subroutine ptm_makeFilename(filename, id, n)
 
 end subroutine
 
-subroutine ptm_setDefaultTunnelSet(TS)
+subroutine ptm_setDefaultTunnelSet(TS, fds)
     implicit none
     type(ptm_TunnelSet) :: TS
+    integer :: fds(8)
     integer :: i, j
     do i = 1, 4
         do j = 1, 2
             call ptm_makeFilename(TS%tnls(i)%fns(j), keys(i), j)
-            TS%tnls(i)%fds(j) = fd_beg + (i-1) * 2 + (j-1)
+            TS%tnls(i)%fds(j) = fds((i-1) * 2 + (j-1) + 1)
             TS%tnls(i)%next_idx = 1
         end do
     end do
 end subroutine 
+
 
 
 subroutine ptm_printSummary(TS)
